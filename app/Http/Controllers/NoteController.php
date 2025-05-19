@@ -7,9 +7,19 @@ use App\Models\Attachment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use League\CommonMark\CommonMarkConverter;
 
 class NoteController extends Controller
 {
+    /**
+     * Convert markdown content to HTML
+     */
+    protected function parseMarkdown($content)
+    {
+        $converter = new CommonMarkConverter(['allow_unsafe_links' => false]);
+        return $converter->convert($content);
+    }
+    
     /**
      * Display a listing of the resource.
      */
@@ -83,7 +93,9 @@ class NoteController extends Controller
     {
         $this->authorize('view', $note);
         
-        return view('notes.show', compact('note'));
+        $parsedContent = $this->parseMarkdown($note->content);
+        
+        return view('notes.show', compact('note', 'parsedContent'));
     }
 
     /**

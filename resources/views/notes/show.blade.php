@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="prose max-w-none">
-                    {{ $note->content }}
+                    {!! $parsedContent !!}
                 </div>
                 <div class="mt-6 text-sm text-gray-500">
                     {{ __('Created') }}: {{ $note->created_at->format('F j, Y, g:i a') }}
