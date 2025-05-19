@@ -38,7 +38,7 @@
                                 <div class="p-4">
                                     <div class="flex justify-between items-start mb-2">
                                         <h3 class="text-lg font-semibold">
-                                            <a href="{{ route('notes.show', $note) }}" class="hover:underline">{{ $note->title }}</a>
+                                            <a href="{{ route('notes.show', $note) }}">{{ $note->title }}</a>
                                         </h3>
                                         <div class="flex space-x-2">
                                             <form action="{{ route('notes.toggle-important', $note) }}" method="POST">
@@ -61,7 +61,7 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <p class="text-gray-600 mb-4 line-clamp-3">{{ Str::limit($note->content, 150) }}</p>
+                                    <a href="{{ route('notes.show', $note) }}" class="block"><p class="text-gray-600 mb-4 line-clamp-3">{{ Str::limit($note->content, 150) }}</p></a>
                                     <div class="flex justify-between items-center text-sm text-gray-500">
                                         <span>{{ $note->created_at->diffForHumans() }}</span>
                                         @if ($note->attachments->count() > 0)
